@@ -17,14 +17,16 @@
     id="journal-container"
 >
     <div
-        class="w-full max-w-2xl mx-auto px-6 py-24 md:py-32 space-y-32 pointer-events-auto"
+        class="w-full max-w-2xl mx-auto px-6 py-24 md:py-32 space-y-32 pointer-events-none"
     >
         <!-- ESPAÇO INICIAL PARA OBSERVAR O BURACO NEGRO -->
         <div
             class="h-[85vh] flex flex-col justify-end items-center pointer-events-none"
             aria-hidden="true"
         >
-            <div class="text-center text-gray-500 text-sm pb-12 animate-pulse">
+            <div
+                class="text-center text-gray-500 text-sm pb-12 animate-pulse pointer-events-auto"
+            >
                 <p>Explore o universo abaixo</p>
                 <div class="animate-bounce mt-4 text-white opacity-50">↓</div>
             </div>
@@ -32,7 +34,7 @@
 
         <!-- TITULO PRINCIPAL -->
         <header
-            class="bg-black/20 backdrop-blur-sm rounded-2xl p-12 border border-white/5 text-center space-y-4"
+            class="bg-black/20 backdrop-blur-sm rounded-2xl p-12 border border-white/5 text-center space-y-4 pointer-events-auto"
             in:fade={{ duration: 1000, delay: 200 }}
         >
             <h1
@@ -52,7 +54,7 @@
 
         <!-- INTRODUÇÃO E METADADOS -->
         <section
-            class="bg-black/60 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-2xl text-center space-y-6"
+            class="bg-black/60 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-2xl text-center space-y-6 pointer-events-auto"
         >
             <div class="inline-flex gap-2 flex-wrap justify-center mb-2">
                 {#each articleData.tags as tag}
@@ -84,7 +86,7 @@
 
         <!-- SECTION 1: WHAT IS A BLACK HOLE -->
         <section
-            class="space-y-8 p-8 bg-black/60 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl transition-transform hover:scale-[1.01] duration-500"
+            class="space-y-8 p-8 bg-black/60 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl transition-transform hover:scale-[1.01] duration-500 pointer-events-auto"
         >
             <h2
                 class="text-3xl font-bold text-indigo-300 border-b border-white/10 pb-4 mb-6"
@@ -166,7 +168,7 @@
 
         <!-- SECTION 2: GIANTS OF SCIENCE -->
         <section
-            class="space-y-8 p-8 bg-black/60 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl"
+            class="space-y-8 p-8 bg-black/60 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl pointer-events-auto"
         >
             <h2
                 class="text-3xl font-bold text-indigo-300 border-b border-white/10 pb-4 mb-6"
@@ -297,7 +299,7 @@
 
         <!-- SECTION 3: MATH -->
         <section
-            class="space-y-8 p-8 bg-black/60 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl"
+            class="space-y-8 p-8 bg-black/60 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl pointer-events-auto"
         >
             <h2
                 class="text-3xl font-bold text-indigo-300 border-b border-white/10 pb-4 mb-6"
@@ -398,7 +400,7 @@
 
         <!-- SECTION 4: WHY IT MATTERS -->
         <section
-            class="space-y-8 p-8 bg-black/60 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl"
+            class="space-y-8 p-8 bg-black/60 backdrop-blur-lg rounded-2xl border border-white/10 shadow-2xl pointer-events-auto"
         >
             <h2
                 class="text-3xl font-bold text-indigo-300 border-b border-white/10 pb-4 mb-6"
