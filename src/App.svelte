@@ -4,6 +4,7 @@
   import LanguageSelector from "./components/LanguageSelector.svelte";
   import BlackHole from "./components/BlackHole.svelte";
   import AudioPlayer from "./components/AudioPlayer.svelte";
+  import EducationalJourney from "./components/EducationalJourney.svelte";
 
   // Inicializa o suporte a idiomas
   import { i18n } from "./lib/i18n";
@@ -13,6 +14,8 @@
 <div class="fixed inset-0 z-0">
   <BlackHole />
 </div>
+
+<EducationalJourney />
 
 <AudioPlayer />
 
