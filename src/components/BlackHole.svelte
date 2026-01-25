@@ -42,6 +42,8 @@
         controls.minDistance = 5;
         controls.maxDistance = 50;
         controls.enablePan = false;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
 
         // Feedback for grab
         canvas.addEventListener(
