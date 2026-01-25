@@ -1,41 +1,31 @@
 <script lang="ts">
-  import { locale } from '../lib/i18n';
-  
+  import { locale } from "../lib/i18n";
+
   function setLanguage(lang: string) {
     locale.set(lang);
     // Saves the preference in localStorage
-    localStorage.setItem('preferredLanguage', lang);
+    localStorage.setItem("preferredLanguage", lang);
   }
-
-  // Gets the current language
-  let currentLocale: string = 'en'; // Initially defined as string
-  
-  locale.subscribe(value => {
-    // Ensures that value is always string
-    if (value) {
-      currentLocale = value;
-    }
-  });
 </script>
 
 <div class="language-selector">
-  <button 
-    class={currentLocale === 'en' ? 'active' : ''} 
-    onclick={() => setLanguage('en')}
+  <button
+    class={$locale === "en" ? "active" : ""}
+    onclick={() => setLanguage("en")}
     aria-label="English"
   >
     EN
   </button>
-  <button 
-    class={currentLocale === 'pt' ? 'active' : ''} 
-    onclick={() => setLanguage('pt')}
+  <button
+    class={$locale === "pt" ? "active" : ""}
+    onclick={() => setLanguage("pt")}
     aria-label="Português"
   >
     PT
   </button>
-  <button 
-    class={currentLocale === 'es' ? 'active' : ''} 
-    onclick={() => setLanguage('es')}
+  <button
+    class={$locale === "es" ? "active" : ""}
+    onclick={() => setLanguage("es")}
     aria-label="Español"
   >
     ES
