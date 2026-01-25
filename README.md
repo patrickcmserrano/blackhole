@@ -11,7 +11,7 @@ This template includes:
 - Enhanced dark/light theme system with CSS variables
 - Organized project structure
 - Internationalization (i18n) support
-- Comprehensive unit and E2E tests
+- Comprehensive unit tests
 - CI/CD with GitHub Actions for GitHub Pages deployment
 
 ## Creating Projects from this Template
@@ -163,7 +163,7 @@ The project uses TypeScript for:
 
 ## Tests
 
-This project includes a complete setup for unit and end-to-end (E2E) tests.
+This project includes a complete setup for unit tests.
 
 ### Unit Tests
 
@@ -200,53 +200,9 @@ The internationalization system has comprehensive unit tests that verify:
 - Consistency of translation keys across different languages
 - Appropriate behavior when translation keys don't exist
 
-### End-to-End (E2E) Tests
+### Run Tests
 
-We use [Playwright](https://playwright.dev/) for E2E tests with the following features:
-
-- Support for multiple browsers (Chrome, Firefox, Safari)
-- Accessibility tests
-- Detailed execution reports
-- Specific tests for internationalization functionalities
-
-Available commands:
-
-```bash
-# Run all E2E tests
-npm run e2e
-
-# Run E2E tests with visual interface
-npm run e2e:ui
-
-# View E2E test report
-npm run e2e:report
-```
-
-#### E2E Internationalization Tests
-
-The E2E tests for internationalization ensure that:
-
-- Language selectors are present and functional in the interface
-- Language changes correctly update the page content
-- Language preferences are persisted between reloads
-- Text elements appear correctly in the selected language
-- Accessibility is maintained when switching between languages
-
-These tests use an approach based on the role and name of elements (`getByRole`, `getByText`), which makes the tests more robust and less susceptible to breaking due to changes in HTML or CSS structure.
-
-### Accessibility Tests
-
-The project includes specific accessibility tests for:
-
-- Appropriate header structure
-- Keyboard navigation
-- Appropriate ARIA attributes
-- Color contrast
-- Language selector accessibility
-
-### Run All Tests
-
-To run all tests (unit and E2E) at once:
+To run tests:
 
 ```bash
 npm run test:all
@@ -289,9 +245,8 @@ This template supports automatic deployment to GitHub Pages with comprehensive t
 The deployment workflow (`.github/workflows/deploy.yml`) automatically:
 
 - ✅ **Triggers on every push** to `main` branch
-- ✅ **Runs comprehensive tests** before deployment
+- ✅ **Runs unit tests** before deployment
 - ✅ **Deploys only when tests pass**
-- ✅ **Includes unit and E2E testing**
 - ✅ **Provides complete deployment history**
 - ✅ **Supports manual triggering** via GitHub Actions interface
 
@@ -302,9 +257,8 @@ The automated deployment includes:
 1. **Environment Setup**: Node.js 20 with npm caching
 2. **Dependency Installation**: `npm ci` for reproducible builds
 3. **Unit Testing**: Validates component functionality
-4. **E2E Testing**: End-to-end testing with Playwright across multiple browsers
-5. **Build Generation**: Production-optimized build
-6. **GitHub Pages Deployment**: Automatic publishing to GitHub Pages
+4. **Build Generation**: Production-optimized build
+5. **GitHub Pages Deployment**: Automatic publishing to GitHub Pages
 
 #### Manual Deployment Option
 
@@ -370,7 +324,6 @@ The deployment process includes comprehensive testing:
 3. Ensure all tests pass locally before pushing:
    ```bash
    npm run test:run  # Run unit tests
-   npm run e2e      # Run E2E tests
    npm run build    # Test build process
    ```
 4. Verify the `base` URL configuration
@@ -500,11 +453,5 @@ See `src/components/ThemeToggle.example.ts` for examples of how to extend the th
    - Garantido que os elementos esperados pelos testes E2E estão presentes no DOM
    - Mantida a estrutura correta de cabeçalhos para testes de acessibilidade
 
-Para executar os testes após estas correções:
-```bash
 # Teste unitários
 npm run test:run
-
-# Testes E2E
-npm run e2e
-```

@@ -8,5 +8,5 @@ export default defineConfig({
     tailwindcss(),
     svelte(),
   ],
-  base: process.env.NODE_ENV === 'production' ? '/svelte-ts-skeleton-starter/' : './',
+  base: process.env.NODE_ENV === 'production' ? '/blackhole/' : './',
 });
