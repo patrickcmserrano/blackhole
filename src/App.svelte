@@ -3,6 +3,7 @@
   import ThemeToggle from "./components/ThemeToggle.svelte";
   import LanguageSelector from "./components/LanguageSelector.svelte";
   import BlackHole from "./components/BlackHole.svelte";
+  import AudioPlayer from "./components/AudioPlayer.svelte";
 
   // Inicializa o suporte a idiomas
   import { i18n } from "./lib/i18n";
@@ -12,6 +13,8 @@
 <div class="fixed inset-0 z-0">
   <BlackHole />
 </div>
+
+<AudioPlayer />
 
 <div class="fixed top-4 right-4 z-10 flex gap-4">
   <LanguageSelector />
