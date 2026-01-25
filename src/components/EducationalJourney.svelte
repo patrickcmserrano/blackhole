@@ -17,7 +17,7 @@
     id="journal-container"
 >
     <div
-        class="w-full max-w-2xl mx-auto px-6 py-24 md:py-32 space-y-32 pointer-events-none"
+        class="w-full max-w-2xl mx-auto px-6 py-12 md:py-24 space-y-8 pointer-events-none"
     >
         <!-- ESPAÇO INICIAL PARA OBSERVAR O BURACO NEGRO -->
         <div
@@ -50,7 +50,7 @@
         </header>
 
         <!-- ESPAÇO ENTRE TITULO E INTRODUÇÃO -->
-        <div class="h-[60vh] pointer-events-none" aria-hidden="true"></div>
+        <div class="h-[15vh] pointer-events-none" aria-hidden="true"></div>
 
         <!-- INTRODUÇÃO E METADADOS -->
         <section
@@ -80,9 +80,6 @@
                 <span>{articleData.author}</span>
             </div>
         </section>
-
-        <!-- ESPAÇO PARA OBSERVAR O BURACO NEGRO -->
-        <div class="h-[80vh] pointer-events-none" aria-hidden="true"></div>
 
         <!-- SECTION 1: WHAT IS A BLACK HOLE -->
         <section
