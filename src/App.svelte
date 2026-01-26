@@ -9,12 +9,14 @@
   import NeutronJourney from "./components/NeutronJourney.svelte";
   import Saturn from "./components/Saturn.svelte";
   import SaturnJourney from "./components/SaturnJourney.svelte";
+  import Nebula from "./components/Nebula.svelte";
+  import NebulaJourney from "./components/NebulaJourney.svelte";
 
   // Inicializa o suporte a idiomas
   import { i18n } from "./lib/i18n";
   i18n.initialize();
 
-  type SceneType = "blackhole" | "neutronstar" | "saturn";
+  type SceneType = "blackhole" | "neutronstar" | "saturn" | "nebula";
   let currentScene = $state<SceneType>("blackhole");
 
   function switchScene(scene: SceneType) {
@@ -29,6 +31,8 @@
     <NeutronStar />
   {:else if currentScene === "saturn"}
     <Saturn />
+  {:else if currentScene === "nebula"}
+    <Nebula />
   {/if}
 </div>
 
@@ -38,6 +42,8 @@
   <NeutronJourney />
 {:else if currentScene === "saturn"}
   <SaturnJourney />
+{:else if currentScene === "nebula"}
+  <NebulaJourney />
 {/if}
 
 <AudioPlayer />
@@ -72,6 +78,15 @@
     onclick={() => switchScene("saturn")}
   >
     Saturno
+  </button>
+  <button
+    class="px-5 py-2 rounded-full backdrop-blur-md border transition-all duration-300 cursor-pointer text-[10px] font-mono uppercase tracking-[0.2em]
+        {currentScene === 'nebula'
+      ? 'bg-purple-500/40 border-purple-400 text-white shadow-[0_0_20px_rgba(168,85,247,0.3)]'
+      : 'bg-black/40 border-white/10 text-gray-400 hover:bg-white/10 hover:border-white/20'}"
+    onclick={() => switchScene("nebula")}
+  >
+    Nebulosa
   </button>
 </div>
 
