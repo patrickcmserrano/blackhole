@@ -1,5 +1,6 @@
 <script lang="ts">
     import { fade, fly } from "svelte/transition";
+    import { _ } from "../lib/i18n";
 
     // Data from the user request
     const articleData = {
@@ -25,27 +26,27 @@
             aria-hidden="true"
         >
             <div
-                class="text-center text-gray-500 text-sm pb-12 animate-pulse pointer-events-auto"
+                class="text-center text-white text-sm pb-12 animate-pulse pointer-events-auto drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]"
             >
-                <p>Explore o universo abaixo</p>
-                <div class="animate-bounce mt-4 text-white opacity-50">↓</div>
+                <p>{$_("common.scroll_hint")}</p>
+                <div class="animate-bounce mt-4 text-white opacity-80">↓</div>
             </div>
         </div>
 
         <!-- TITULO PRINCIPAL -->
         <header
-            class="bg-black/20 backdrop-blur-sm rounded-2xl p-12 border border-white/5 text-center space-y-4 pointer-events-auto"
+            class="bg-black/70 backdrop-blur-xl rounded-2xl p-12 border border-white/10 text-center space-y-4 pointer-events-auto shadow-[0_0_50px_rgba(0,0,0,0.5)]"
             in:fade={{ duration: 1000, delay: 200 }}
         >
             <h1
-                class="text-4xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-indigo-100 to-indigo-400 leading-tight uppercase tracking-tighter"
+                class="text-4xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-indigo-100 to-indigo-400 leading-tight uppercase tracking-tighter drop-shadow-2xl"
             >
-                No Limite da Realidade
+                {$_("blackhole.title_main")}
             </h1>
             <h2
-                class="text-xl md:text-3xl font-light text-indigo-200/60 uppercase tracking-widest"
+                class="text-xl md:text-3xl font-light text-indigo-100 uppercase tracking-widest drop-shadow-lg"
             >
-                Uma Jornada aos Buracos Negros
+                {$_("blackhole.title_sub")}
             </h2>
         </header>
 
@@ -54,10 +55,10 @@
 
         <!-- INTRODUÇÃO E METADADOS -->
         <section
-            class="bg-black/60 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-2xl text-center space-y-6 pointer-events-auto"
+            class="bg-black/80 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-2xl text-center space-y-6 pointer-events-auto"
         >
             <div class="inline-flex gap-2 flex-wrap justify-center mb-2">
-                {#each articleData.tags as tag}
+                {#each $_("blackhole.tags") as tag}
                     <span
                         class="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/20 text-indigo-200 border border-indigo-500/30 uppercase tracking-wider"
                     >
@@ -69,15 +70,15 @@
             <p
                 class="text-xl md:text-2xl text-gray-200 italic max-w-xl mx-auto leading-relaxed"
             >
-                "{articleData.description}"
+                "{$_("blackhole.description")}"
             </p>
 
             <div
-                class="flex items-center justify-center gap-4 text-sm text-gray-500 font-mono border-t border-white/5 pt-6"
+                class="flex items-center justify-center gap-4 text-sm text-gray-300 font-mono border-t border-white/10 pt-6"
             >
-                <span>{articleData.date}</span>
+                <span>{$_("common.date")}</span>
                 <span>•</span>
-                <span>{articleData.author}</span>
+                <span>{$_("common.author")}</span>
             </div>
         </section>
 
@@ -88,38 +89,35 @@
             <h2
                 class="text-3xl font-bold text-indigo-300 border-b border-white/10 pb-4 mb-6"
             >
-                1. O Que é um Buraco Negro?
+                {$_("blackhole.section1.title")}
             </h2>
 
             <div class="space-y-6 text-gray-200 leading-relaxed font-light">
                 <h3 class="text-xl font-semibold text-white">
-                    O Derradeiro Ralo Cósmico
+                    {$_("blackhole.section1.subtitle")}
                 </h3>
                 <p>
-                    Imagine um lugar onde a gravidade é tão intensa que nada,
-                    absolutamente nada, consegue escapar. Nem foguetes, nem
-                    partículas, nem mesmo a luz — a coisa mais rápida do
-                    universo. Esse lugar é um buraco negro.
+                    {$_("blackhole.section1.p1")}
                 </p>
                 <p>
-                    Eles não são "buracos" no sentido tradicional, mas sim
-                    quantidades imensas de matéria espremida em um espaço
-                    incrivelmente pequeno.
+                    {$_("blackhole.section1.p2")}
                 </p>
 
                 <div
                     class="bg-indigo-900/30 border-l-4 border-indigo-500 p-4 my-6 rounded-r-lg"
                 >
                     <p class="text-sm">
-                        <strong class="text-indigo-300">Analogia:</strong> É como
-                        compactar a massa de dez sóis no tamanho de uma cidade como
-                        São Paulo. O resultado é um campo gravitacional que deforma
-                        o tecido do espaço e do tempo ao seu redor de forma irreversível.
+                        <strong class="text-indigo-300"
+                            >{$_("blackhole.section1.analogy").split(
+                                ":",
+                            )[0]}:</strong
+                        >
+                        {$_("blackhole.section1.analogy").split(":")[1]}
                     </p>
                 </div>
 
                 <h3 class="text-xl font-semibold text-white mt-8 mb-4">
-                    Anatomia do Abismo
+                    {$_("blackhole.section1.anatomy_title")}
                 </h3>
                 <ul class="space-y-4">
                     <li class="flex items-start gap-3">
@@ -128,10 +126,11 @@
                         ></div>
                         <div>
                             <strong class="text-indigo-200"
-                                >Horizonte de Eventos:</strong
-                            > O ponto de não retorno. A esfera preta central que
-                            você vê na visualização. Cruzou essa linha, você pertence
-                            ao buraco negro para sempre.
+                                >{$_(
+                                    "blackhole.section1.event_horizon",
+                                )}</strong
+                            >
+                            {$_("blackhole.section1.event_horizon_desc")}
                         </div>
                     </li>
                     <li class="flex items-start gap-3">
@@ -140,10 +139,9 @@
                         ></div>
                         <div>
                             <strong class="text-purple-300"
-                                >Singularidade:</strong
-                            > O centro teórico. Um ponto de densidade infinita e
-                            volume zero onde as leis da física como conhecemos deixam
-                            de fazer sentido.
+                                >{$_("blackhole.section1.singularity")}</strong
+                            >
+                            {$_("blackhole.section1.singularity_desc")}
                         </div>
                     </li>
                     <li class="flex items-start gap-3">
@@ -152,11 +150,11 @@
                         ></div>
                         <div>
                             <strong class="text-orange-300"
-                                >Disco de Acreção:</strong
-                            > O anel brilhante e quente de gás e poeira girando em
-                            velocidades próximas à da luz. O atrito gera tanto calor
-                            que o disco brilha em raios-X, tornando o buraco negro
-                            visível indiretamente.
+                                >{$_(
+                                    "blackhole.section1.accretion_disk",
+                                )}</strong
+                            >
+                            {$_("blackhole.section1.accretion_disk_desc")}
                         </div>
                     </li>
                 </ul>
@@ -170,11 +168,10 @@
             <h2
                 class="text-3xl font-bold text-indigo-300 border-b border-white/10 pb-4 mb-6"
             >
-                2. Gigantes da Ciência: Uma Linha do Tempo
+                {$_("blackhole.section2.title")}
             </h2>
             <p class="text-gray-300 mb-8">
-                A compreensão desses monstros cósmicos não aconteceu da noite
-                para o dia. Foi uma construção de séculos.
+                {$_("blackhole.section2.p1")}
             </p>
 
             <div
@@ -189,13 +186,10 @@
                         >1783</span
                     >
                     <h3 class="text-lg font-bold text-white mb-2">
-                        O Visionário: John Michell
+                        {$_("blackhole.section2.year_1783_title")}
                     </h3>
                     <p class="text-gray-300 text-sm leading-relaxed">
-                        Um clérigo e astrônomo inglês que propôs pela primeira
-                        vez a ideia de "estrelas escuras". Usando a física
-                        newtoniana, ele calculou que uma estrela poderia ser tão
-                        massiva que sua velocidade de escape superaria a da luz.
+                        {$_("blackhole.section2.year_1783_desc")}
                     </p>
                 </div>
 
@@ -208,17 +202,13 @@
                         >1915</span
                     >
                     <h3 class="text-lg font-bold text-white mb-2">
-                        O Arquiteto: Albert Einstein
+                        {$_("blackhole.section2.year_1915_title")}
                     </h3>
                     <p class="text-gray-300 text-sm leading-relaxed">
-                        Sua Teoria da Relatividade Geral criou a fundação para
-                        eles. Einstein mostrou que a gravidade não é uma "força"
-                        mágica, mas a curvatura do espaço-tempo causada pela
-                        massa.
+                        {$_("blackhole.section2.year_1915_desc")}
                         <br /><br />
                         <span class="italic text-white/80"
-                            >"A matéria diz ao espaço como se curvar. O espaço
-                            diz à matéria como se mover."</span
+                            >{$_("blackhole.section2.einstein_quote")}</span
                         >
                     </p>
                 </div>
@@ -232,13 +222,10 @@
                         >1916</span
                     >
                     <h3 class="text-lg font-bold text-white mb-2">
-                        O Solucionador: Karl Schwarzschild
+                        {$_("blackhole.section2.year_1916_title")}
                     </h3>
                     <p class="text-gray-300 text-sm leading-relaxed">
-                        Meses após a publicação de Einstein, Schwarzschild
-                        encontrou a primeira solução exata para as equações,
-                        prevendo o tamanho exato que algo precisa ser comprimido
-                        para virar um buraco negro.
+                        {$_("blackhole.section2.year_1916_desc")}
                     </p>
                 </div>
 
@@ -251,25 +238,26 @@
                         >Anos 60 e 70</span
                     >
                     <h3 class="text-lg font-bold text-white mb-2">
-                        A Era de Ouro
+                        {$_("blackhole.section2.era_golden_title")}
                     </h3>
                     <ul class="text-gray-300 text-sm leading-relaxed space-y-2">
                         <li>
                             <strong class="text-indigo-200"
-                                >John Wheeler:</strong
-                            > Popularizou o termo "buraco negro".
+                                >{$_("blackhole.section2.wheeler_name")}</strong
+                            >
+                            {$_("blackhole.section2.wheeler_desc")}
                         </li>
                         <li>
                             <strong class="text-indigo-200"
-                                >Roger Penrose:</strong
-                            > Provou que singularidades são inevitáveis no colapso
-                            gravitacional.
+                                >{$_("blackhole.section2.penrose_name")}</strong
+                            >
+                            {$_("blackhole.section2.penrose_desc")}
                         </li>
                         <li>
                             <strong class="text-indigo-200"
-                                >Stephen Hawking:</strong
-                            > Mostrou que buracos negros emitem radiação ("Radiação
-                            Hawking").
+                                >{$_("blackhole.section2.hawking_name")}</strong
+                            >
+                            {$_("blackhole.section2.hawking_desc")}
                         </li>
                     </ul>
                 </div>
@@ -283,12 +271,10 @@
                         >2019</span
                     >
                     <h3 class="text-lg font-bold text-white mb-2">
-                        A Imagem: Colaboração EHT
+                        {$_("blackhole.section2.year_2019_title")}
                     </h3>
                     <p class="text-gray-300 text-sm leading-relaxed">
-                        Uma rede global de radiotelescópios capturou a primeira
-                        imagem direta da sombra de um buraco negro supermassivo
-                        em M87.
+                        {$_("blackhole.section2.year_2019_desc")}
                     </p>
                 </div>
             </div>
@@ -301,20 +287,19 @@
             <h2
                 class="text-3xl font-bold text-indigo-300 border-b border-white/10 pb-4 mb-6"
             >
-                3. A Linguagem Matemática do Cosmos
+                {$_("blackhole.section3.title")}
             </h2>
             <p class="text-gray-300">
-                Não precisamos ser físicos para apreciar a beleza das equações
-                que descrevem esses monstros.
+                {$_("blackhole.section3.p1")}
             </p>
 
             <!-- Schwarzschild Radius -->
             <div class="bg-gray-900/50 rounded-xl p-6 border border-white/5">
                 <h3 class="text-xl font-semibold text-white mb-4">
-                    O Raio de Schwarzschild
+                    {$_("blackhole.section3.schwarzschild_title")}
                 </h3>
                 <p class="text-gray-400 text-sm mb-6">
-                    Esta equação define o tamanho da "boca" do buraco negro.
+                    {$_("blackhole.section3.schwarzschild_desc")}
                 </p>
 
                 <div class="flex justify-center my-8 overflow-x-auto">
@@ -334,20 +319,24 @@
                     class="grid grid-cols-2 gap-4 text-xs md:text-sm text-gray-400 font-mono bg-black/20 p-4 rounded-lg"
                 >
                     <div>
-                        <span class="text-indigo-300 font-bold">Rs</span> : Raio
-                        do horizonte
+                        <span class="text-indigo-300 font-bold">Rs</span> : {$_(
+                            "blackhole.section3.rs",
+                        )}
                     </div>
                     <div>
-                        <span class="text-indigo-300 font-bold">M</span> : Massa
-                        do objeto
+                        <span class="text-indigo-300 font-bold">M</span> : {$_(
+                            "blackhole.section3.m",
+                        )}
                     </div>
                     <div>
-                        <span class="text-indigo-300 font-bold">G</span> : Constante
-                        gravitacional
+                        <span class="text-indigo-300 font-bold">G</span> : {$_(
+                            "blackhole.section3.g",
+                        )}
                     </div>
                     <div>
-                        <span class="text-indigo-300 font-bold">c</span> : Velocidade
-                        da luz
+                        <span class="text-indigo-300 font-bold">c</span> : {$_(
+                            "blackhole.section3.c",
+                        )}
                     </div>
                 </div>
             </div>
@@ -357,10 +346,10 @@
                 class="bg-gray-900/50 rounded-xl p-6 border border-white/5 mt-8"
             >
                 <h3 class="text-xl font-semibold text-white mb-4">
-                    Equações de Campo de Einstein
+                    {$_("blackhole.section3.einstein_eq_title")}
                 </h3>
                 <p class="text-gray-400 text-sm mb-6">
-                    A base de toda a cosmologia moderna.
+                    {$_("blackhole.section3.einstein_eq_desc")}
                 </p>
 
                 <div class="flex justify-center my-8 overflow-x-auto">
@@ -380,16 +369,18 @@
                 <div class="space-y-4 text-sm text-gray-300">
                     <p>
                         <strong class="text-white"
-                            >Lado Esquerdo (G<sub>&mu;&nu;</sub>):</strong
-                        > Descreve a geometria (curvatura) do espaço-tempo.
+                            >{$_("blackhole.section3.left_side")}</strong
+                        >
+                        {$_("blackhole.section3.left_side_desc")}
                     </p>
                     <p>
                         <strong class="text-white"
-                            >Lado Direito (T<sub>&mu;&nu;</sub>):</strong
-                        > Descreve a distribuição de matéria e energia.
+                            >{$_("blackhole.section3.right_side")}</strong
+                        >
+                        {$_("blackhole.section3.right_side_desc")}
                     </p>
                     <p class="italic text-indigo-300 text-center mt-4">
-                        "A presença de massa curva o universo ao seu redor".
+                        {$_("blackhole.section3.einstein_summary")}
                     </p>
                 </div>
             </div>
@@ -402,7 +393,7 @@
             <h2
                 class="text-3xl font-bold text-indigo-300 border-b border-white/10 pb-4 mb-6"
             >
-                4. Por Que Isso Importa?
+                {$_("blackhole.section4.title")}
             </h2>
 
             <div class="grid md:grid-cols-2 gap-6">
@@ -410,11 +401,10 @@
                     class="bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-colors"
                 >
                     <h3 class="text-lg font-bold text-white mb-2">
-                        1. O Laboratório Definitivo
+                        {$_("blackhole.section4.item1_title")}
                     </h3>
                     <p class="text-sm text-gray-300">
-                        O único lugar onde a Relatividade Geral e a Mecânica
-                        Quântica colidem. A chave para a "Teoria de Tudo".
+                        {$_("blackhole.section4.item1_desc")}
                     </p>
                 </div>
 
@@ -422,12 +412,10 @@
                     class="bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-colors"
                 >
                     <h3 class="text-lg font-bold text-white mb-2">
-                        2. Tecnologia GPS
+                        {$_("blackhole.section4.item2_title")}
                     </h3>
                     <p class="text-sm text-gray-300">
-                        Sistemas GPS dependem das correções relativísticas de
-                        Einstein. Sem elas, a precisão cairia quilômetros por
-                        dia.
+                        {$_("blackhole.section4.item2_desc")}
                     </p>
                 </div>
 
@@ -435,11 +423,10 @@
                     class="bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-colors"
                 >
                     <h3 class="text-lg font-bold text-white mb-2">
-                        3. Ondas Gravitacionais
+                        {$_("blackhole.section4.item3_title")}
                     </h3>
                     <p class="text-sm text-gray-300">
-                        Desde 2015, podemos "ouvir" colisões de buracos negros,
-                        uma nova janela para observar o invisível.
+                        {$_("blackhole.section4.item3_desc")}
                     </p>
                 </div>
 
@@ -447,11 +434,10 @@
                     class="bg-white/5 p-6 rounded-xl hover:bg-white/10 transition-colors"
                 >
                     <h3 class="text-lg font-bold text-white mb-2">
-                        4. Filosofia
+                        {$_("blackhole.section4.item4_title")}
                     </h3>
                     <p class="text-sm text-gray-300">
-                        Eles representam o limite do conhecimento e nos forçam a
-                        confrontar a vastidão e estranheza do universo.
+                        {$_("blackhole.section4.item4_desc")}
                     </p>
                 </div>
             </div>

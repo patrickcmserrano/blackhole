@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { _ } from "../lib/i18n";
 
     let player: any;
     let isPlaying = $state(false);
@@ -117,17 +118,17 @@
         onclick={toggleAudio}
         class="group flex items-center gap-3 bg-accent/10 hover:bg-accent/20 border border-accent/50 hover:border-accent text-accent px-4 py-2 rounded-full transition-all duration-300 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
         aria-label={playbackError
-            ? "Audio unavailable"
+            ? $_("common.audio_unavailable")
             : isMuted
-              ? "Unmute music"
-              : "Mute music"}
+              ? $_("common.audio_on")
+              : $_("common.audio_off")}
         title={playbackError
-            ? "Video not embeddable"
+            ? $_("common.audio_unavailable")
             : playerReady
               ? isMuted
-                  ? "Play Music"
-                  : "Mute Music"
-              : "Loading Player..."}
+                  ? $_("common.audio_on")
+                  : $_("common.audio_off")
+              : $_("common.loading")}
         disabled={!!playbackError}
     >
         <div class="relative w-5 h-5 flex items-center justify-center">
@@ -171,11 +172,11 @@
         </div>
         <span class="text-xs font-mono uppercase tracking-widest min-w-[80px]">
             {#if playbackError}
-                {playbackError}
+                {$_("common.audio_unavailable")}
             {:else if !playerReady}
-                Loading...
+                {$_("common.loading")}
             {:else}
-                {isMuted ? "Audio Off" : "Audio On"}
+                {isMuted ? $_("common.audio_off") : $_("common.audio_on")}
             {/if}
         </span>
     </button>

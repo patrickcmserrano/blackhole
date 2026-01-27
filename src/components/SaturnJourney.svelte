@@ -1,5 +1,6 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
+    import { _ } from "../lib/i18n";
 
     const articleData = {
         title: "O Senhor dos Anéis: Saturno Revelado",
@@ -24,27 +25,27 @@
             aria-hidden="true"
         >
             <div
-                class="text-center text-gray-400 text-sm pb-12 animate-pulse pointer-events-auto"
+                class="text-center text-white text-sm pb-12 animate-pulse pointer-events-auto drop-shadow-[0_0_8px_rgba(0,0,0,0.8)]"
             >
-                <p>Explore os anéis</p>
-                <div class="animate-bounce mt-4 text-white opacity-50">↓</div>
+                <p>{$_("saturn.scroll_hint")}</p>
+                <div class="animate-bounce mt-4 text-white opacity-80">↓</div>
             </div>
         </div>
 
         <!-- TITULO -->
         <header
-            class="bg-black/20 backdrop-blur-sm rounded-2xl p-12 border border-white/5 text-center space-y-4 pointer-events-auto"
+            class="bg-black/70 backdrop-blur-xl rounded-2xl p-12 border border-white/10 text-center space-y-4 pointer-events-auto shadow-[0_0_50px_rgba(255,180,0,0.15)]"
             in:fade={{ duration: 1000, delay: 200 }}
         >
             <h1
-                class="text-4xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-amber-100 via-orange-200 to-amber-500 leading-tight uppercase tracking-tighter"
+                class="text-4xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-amber-100 via-orange-200 to-amber-500 leading-tight uppercase tracking-tighter drop-shadow-2xl"
             >
-                O Senhor dos Anéis
+                {$_("saturn.title_main")}
             </h1>
             <h2
-                class="text-xl md:text-3xl font-light text-amber-200/60 uppercase tracking-widest"
+                class="text-xl md:text-3xl font-light text-amber-100 uppercase tracking-widest drop-shadow-lg"
             >
-                Saturn's Grandeur
+                {$_("saturn.title_sub")}
             </h2>
         </header>
 
@@ -52,10 +53,10 @@
 
         <!-- INTRO -->
         <section
-            class="bg-black/60 backdrop-blur-md rounded-2xl p-8 border border-white/10 shadow-2xl text-center space-y-6 pointer-events-auto"
+            class="bg-black/80 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-2xl text-center space-y-6 pointer-events-auto"
         >
             <div class="inline-flex gap-2 flex-wrap justify-center mb-2">
-                {#each articleData.tags as tag}
+                {#each $_("saturn.tags") as tag}
                     <span
                         class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-200 border border-amber-500/30 uppercase tracking-wider"
                     >
@@ -67,7 +68,7 @@
             <p
                 class="text-xl md:text-2xl text-gray-200 italic max-w-xl mx-auto leading-relaxed"
             >
-                "{articleData.description}"
+                "{$_("saturn.description")}"
             </p>
         </section>
 
@@ -78,21 +79,14 @@
             <h2
                 class="text-3xl font-bold text-amber-300 border-b border-white/10 pb-4 mb-6"
             >
-                1. Não é um Disco Sólido
+                {$_("saturn.section1.title")}
             </h2>
             <div class="space-y-6 text-gray-200 leading-relaxed font-light">
                 <p>
-                    Embora pareçam sólidos vistos da Terra, os anéis de Saturno
-                    são, na verdade, compostos por
-                    <strong class="text-white"
-                        >bilhões de pedaços de gelo e rocha</strong
-                    >.
+                    {$_("saturn.section1.p1")}
                 </p>
                 <p>
-                    O tamanho dessas partículas varia de grãos de poeira a
-                    montanhas inteiras. A visualização que você vê usa milhares
-                    de pequenas rochas simuladas individualmente para recriar
-                    essa dispersão.
+                    {$_("saturn.section1.p2")}
                 </p>
 
                 <div
@@ -100,14 +94,9 @@
                 >
                     <p class="text-sm">
                         <strong class="text-amber-300"
-                            >Fato Surpreendente:</strong
+                            >{$_("saturn.section1.fact_title")}</strong
                         >
-                        Apesar de terem milhares de quilômetros de largura, os
-                        anéis são incrivelmente finos — em média, têm apenas
-                        cerca de
-                        <strong class="text-white"
-                            >10 metros de espessura</strong
-                        >.
+                        {$_("saturn.section1.fact_desc")}
                     </p>
                 </div>
             </div>
@@ -120,29 +109,18 @@
             <h2
                 class="text-3xl font-bold text-amber-300 border-b border-white/10 pb-4 mb-6"
             >
-                2. As Luas Pastoras e a Vida
+                {$_("saturn.section2.title")}
             </h2>
             <div class="space-y-6 text-gray-200 leading-relaxed font-light">
                 <p>
-                    Saturno não reina sozinho. Ele é acompanhado por uma corte
-                    de dezenas de luas. Algumas, chamadas de
-                    <strong class="text-white">Luas Pastoras</strong>, orbitam
-                    dentro ou perto dos anéis, usando sua gravidade para manter
-                    as partículas de gelo em ordem, criando as falhas visíveis
-                    entre os anéis.
+                    {$_("saturn.section2.p1")}
                 </p>
 
                 <h3 class="text-xl font-semibold text-white mt-8 mb-4">
-                    Encélado: Onde a Vida Pode Existir
+                    {$_("saturn.section2.enceladus_title")}
                 </h3>
                 <p>
-                    Uma das luas mais fascinantes é <strong
-                        class="text-blue-200">Encélado</strong
-                    >. Coberta por uma camada de gelo branco brilhante, ela
-                    esconde um oceano global de água líquida abaixo da
-                    superfície. Gêiseres gigantes cospem água no espaço,
-                    sugerindo que este pequeno mundo pode ter todos os
-                    ingredientes necessários para a vida.
+                    {$_("saturn.section2.enceladus_p")}
                 </p>
             </div>
         </section>
@@ -154,20 +132,14 @@
             <h2
                 class="text-3xl font-bold text-amber-300 border-b border-white/10 pb-4 mb-6"
             >
-                3. O Legado da Cassini
+                {$_("saturn.section3.title")}
             </h2>
             <div class="space-y-6 text-gray-200 leading-relaxed font-light">
                 <p>
-                    Muito do que sabemos hoje vem da missão <strong
-                        class="text-white">Cassini-Huygens</strong
-                    > (1997-2017). Durante 13 anos, a sonda orbitou Saturno, enviando
-                    imagens deslumbrantes e dados revolucionários.
+                    {$_("saturn.section3.p1")}
                 </p>
                 <p>
-                    Em seu "Grand Finale", a Cassini mergulhou corajosamente no
-                    espaço estreito entre o planeta e seus anéis, antes de se
-                    desintegrar na atmosfera de Saturno para proteger as luas de
-                    contaminação terrestre.
+                    {$_("saturn.section3.p2")}
                 </p>
             </div>
         </section>

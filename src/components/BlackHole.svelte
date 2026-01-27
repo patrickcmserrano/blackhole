@@ -60,9 +60,9 @@
 
         const bloomPass = new UnrealBloomPass(
             new THREE.Vector2(window.innerWidth, window.innerHeight),
-            1.5, // Reduced Strength slightly to preserve sharp edges
-            0.0, // Radius
-            0.0, // Threshold
+            0.8, // Reduced Strength
+            0.4, // Radius
+            0.7, // Increased Threshold so only bright parts glow
         );
 
         const composer = new EffectComposer(renderer);
@@ -97,10 +97,11 @@
         scene.add(blackHole);
 
         // 2. Photon Ring (The thin ring of light trapped in orbit)
-        // We use a Fresnel shader on a slightly larger sphere
         const photonGeo = new THREE.SphereGeometry(2.1, 64, 64);
         const photonMat = new THREE.ShaderMaterial({
-            uniforms: {},
+            uniforms: {
+                uTime: { value: 0 },
+            },
             vertexShader: `
             varying vec3 vNormal;
             varying vec3 vViewPosition;
@@ -112,26 +113,55 @@
             }
         `,
             fragmentShader: `
+            uniform float uTime;
             varying vec3 vNormal;
             varying vec3 vViewPosition;
             void main() {
                 vec3 normal = normalize(vNormal);
                 vec3 viewDir = normalize(vViewPosition);
-                // Fresnel effect
-                float fresnel = pow(1.0 - dot(normal, viewDir), 6.0); 
-                // Sharp cut-off to make it a thin ring
-                fresnel = smoothstep(0.4, 0.9, fresnel);
+                // Fresnel effect - adjusted for more constant visibility
+                float fresnel = pow(1.0 - dot(normal, viewDir), 3.0); 
+                fresnel = smoothstep(0.3, 0.8, fresnel);
                 
-                gl_FragColor = vec4(1.0, 0.9, 0.8, fresnel * 0.8);
+                // Add a bit of pulse
+                float pulse = 0.8 + 0.2 * sin(uTime * 2.0);
+                
+                gl_FragColor = vec4(1.0, 0.8, 0.4, fresnel * pulse);
             }
         `,
             transparent: true,
-            side: THREE.BackSide, // Render on the back to act as a halo
+            side: THREE.DoubleSide,
             blending: THREE.AdditiveBlending,
             depthWrite: false,
         });
         const photonRing = new THREE.Mesh(photonGeo, photonMat);
         scene.add(photonRing);
+
+        // 2.5 Secondary Glow for 3D depth
+        const glowGeo = new THREE.SphereGeometry(2.3, 64, 64);
+        const glowMat = new THREE.ShaderMaterial({
+            uniforms: {},
+            vertexShader: `
+                varying vec3 vNormal;
+                void main() {
+                    vNormal = normalize(normalMatrix * normal);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                varying vec3 vNormal;
+                void main() {
+                    // Constant thin edge glow
+                    float edge = pow(1.0 - abs(vNormal.z), 1.2);
+                    gl_FragColor = vec4(1.0, 0.5, 0.2, edge * 0.3);
+                }
+            `,
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+        });
+        const outerGlow = new THREE.Mesh(glowGeo, glowMat);
+        scene.add(outerGlow);
 
         // 3. Accretion Disk (Shader Based)
         // We use a plane and handle the ring shape in the fragment shader
@@ -267,8 +297,8 @@
         
         // Color Mapping
         // Core is hot (white/yellow), edges cool to red/orange
-        vec3 colorHot = vec3(5.0, 3.5, 1.5); // Very bright core
-        vec3 colorCool = vec3(1.2, 0.3, 0.1); 
+        vec3 colorHot = vec3(2.5, 1.8, 0.8); // Less overwhelming core
+        vec3 colorCool = vec3(1.0, 0.25, 0.05); 
         
         // Inner parts are hotter
         float heat = smoothstep(0.5, 0.29, r); 
@@ -276,8 +306,8 @@
         
         vec3 finalColor = mix(colorCool, colorHot, heat * intensity);
         
-        // Enhance brightness for Bloom
-        finalColor *= 1.5 + intensity * 2.0;
+        // Slightly tuned brightness
+        finalColor *= 1.2 + intensity * 1.5;
 
         gl_FragColor = vec4(finalColor, alpha);
       }
@@ -310,7 +340,7 @@
 
             // Update uniforms
             diskMaterial.uniforms.uTime.value = elapsedTime;
-            // disk.rotation.z = elapsedTime * 0.05; // Moved rotation directly to shader for smoother look
+            photonMat.uniforms.uTime.value = elapsedTime;
 
             controls.update();
 
