@@ -11,6 +11,9 @@ import es from './locales/es';
 export const SUPPORTED_LANGUAGES = ['en', 'pt', 'es'] as const;
 export type SupportedLanguage = typeof SUPPORTED_LANGUAGES[number];
 
+// Translation dictionary for easier access
+export const translations: Record<SupportedLanguage, any> = { en, pt, es };
+
 // Add messages to the dictionary
 addMessages('en', en);
 addMessages('pt', pt);
@@ -29,7 +32,7 @@ export function setupI18n() {
 // Function to get the initial locale based on browser or localStorage
 function getInitialLocale() {
   if (typeof window === 'undefined') {
-    return 'en';
+    return 'pt'; // Standardized default to PT
   }
 
   // Check if there's a preferred language stored in localStorage
@@ -41,7 +44,7 @@ function getInitialLocale() {
 
   // Use browser language if available
   const browserLocale = navigator.language.split('-')[0];
-  return SUPPORTED_LANGUAGES.includes(browserLocale as SupportedLanguage) ? browserLocale : 'en';
+  return SUPPORTED_LANGUAGES.includes(browserLocale as SupportedLanguage) ? browserLocale : 'pt';
 }
 
 export function createI18nStore() {
@@ -49,6 +52,7 @@ export function createI18nStore() {
 
   const store = {
     subscribe,
+    translations, // Expose for testing
     setLanguage(lang: SupportedLanguage) {
       if (typeof localStorage !== 'undefined') {
         localStorage.setItem('preferredLanguage', lang);
@@ -81,10 +85,21 @@ export function createI18nStore() {
       this.setLanguage('pt');
     },
     // Simplified t function that uses svelte-i18n under the hood
-    t(key: string, vars?: any) {
-      // This is a bit of a hack since we use $_ in components
-      // but keeping it for compatibility if used elsewhere
-      return key;
+    t(keyPath: string, lang?: SupportedLanguage) {
+      if (!lang) return keyPath;
+
+      const keys = keyPath.split('.');
+      let current = translations[lang];
+
+      for (const key of keys) {
+        if (current && typeof current === 'object' && key in current) {
+          current = current[key];
+        } else {
+          return keyPath;
+        }
+      }
+
+      return typeof current === 'string' ? current : keyPath;
     }
   };
 

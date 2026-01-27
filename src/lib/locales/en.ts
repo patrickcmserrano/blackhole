@@ -81,6 +81,16 @@ export default {
       "item3_desc": "Since 2015, we can \"hear\" black hole collisions, a new window to observe the invisible.",
       "item4_title": "4. Philosophy",
       "item4_desc": "They represent the limit of knowledge and force us to confront the vastness and strangeness of the universe."
+    },
+    "section5": {
+      "title": "5. Behind the Code",
+      "intro": "This visualization runs entirely in your browser using WebGL for real-time rendering.",
+      "item1_title": "Shaders & GLSL",
+      "item1_desc": "We don't use static images. The ring and disk are mathematically generated pixel-by-pixel using shaders, allowing full control over light and color.",
+      "item2_title": "Procedural Noise",
+      "item2_desc": "The 'fire' texture of the accretion disk is created with noise algorithms (Perlin/Simplex Noise), ensuring organic and continuous movement.",
+      "item3_title": "Post-Processing",
+      "item3_desc": "The ethereal glow (Bloom) is applied after the scene render, simulating how real cameras react to intense light sources."
     }
   },
   "neutron": {

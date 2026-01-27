@@ -81,6 +81,16 @@ export default {
       "item3_desc": "Desde 2015, podemos \"ouvir\" colisões de buracos negros, uma nova janela para observar o invisível.",
       "item4_title": "4. Filosofia",
       "item4_desc": "Eles representam o limite do conhecimento e nos forçam a confrontar a vastidão e estranheza do universo."
+    },
+    "section5": {
+      "title": "5. Bastidores do Código",
+      "intro": "Essa visualização roda inteiramente no seu navegador, usando WebGL para renderização em tempo real.",
+      "item1_title": "Shaders & GLSL",
+      "item1_desc": "Não usamos imagens estáticas. O anel e o disco são gerados matematicamente pixel por pixel usando shaders, permitindo controle total sobre a luz e cor.",
+      "item2_title": "Ruído Procedural",
+      "item2_desc": "A textura de 'fogo' do disco de acreção é criada com algoritmos de ruído (Perlin/Simplex Noise), garantindo um movimento orgânico e contínuo.",
+      "item3_title": "Pós-Processamento",
+      "item3_desc": "O brilho etéreo (Bloom) é aplicado após a renderização da cena, simulando como câmeras reais reagem a fontes de luz intensa."
     }
   },
   "neutron": {
