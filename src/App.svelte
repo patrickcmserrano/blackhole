@@ -50,47 +50,53 @@
 
 <!-- Navigation UI -->
 <div
-  class="fixed top-6 left-1/2 -translate-x-1/2 z-20 flex gap-3 pointer-events-auto"
+  class="fixed top-16 md:top-6 left-0 right-0 z-20 flex justify-center w-full pointer-events-none"
 >
-  <button
-    class="px-5 py-2 rounded-full backdrop-blur-md border transition-all duration-300 cursor-pointer text-[10px] font-mono uppercase tracking-[0.2em]
-        {currentScene === 'blackhole'
-      ? 'bg-indigo-500/40 border-indigo-400 text-white shadow-[0_0_20px_rgba(99,102,241,0.3)]'
-      : 'bg-black/70 border-white/20 text-gray-200 hover:bg-black/80 hover:border-white/40'}"
-    onclick={() => switchScene("blackhole")}
+  <div
+    class="flex gap-2 md:gap-3 overflow-x-auto px-4 max-w-full pointer-events-auto no-scrollbar justify-start md:justify-center items-center py-2"
   >
-    {$_("nav.blackhole")}
-  </button>
-  <button
-    class="px-5 py-2 rounded-full backdrop-blur-md border transition-all duration-300 cursor-pointer text-[10px] font-mono uppercase tracking-[0.2em]
-        {currentScene === 'neutronstar'
-      ? 'bg-cyan-500/40 border-cyan-400 text-white shadow-[0_0_20px_rgba(34,211,238,0.3)]'
-      : 'bg-black/70 border-white/20 text-gray-200 hover:bg-black/80 hover:border-white/40'}"
-    onclick={() => switchScene("neutronstar")}
-  >
-    {$_("nav.neutronstar")}
-  </button>
-  <button
-    class="px-5 py-2 rounded-full backdrop-blur-md border transition-all duration-300 cursor-pointer text-[10px] font-mono uppercase tracking-[0.2em]
-        {currentScene === 'saturn'
-      ? 'bg-amber-500/40 border-amber-400 text-white shadow-[0_0_20px_rgba(251,191,36,0.3)]'
-      : 'bg-black/70 border-white/20 text-gray-200 hover:bg-black/80 hover:border-white/40'}"
-    onclick={() => switchScene("saturn")}
-  >
-    {$_("nav.saturn")}
-  </button>
-  <button
-    class="px-5 py-2 rounded-full backdrop-blur-md border transition-all duration-300 cursor-pointer text-[10px] font-mono uppercase tracking-[0.2em]
-        {currentScene === 'nebula'
-      ? 'bg-purple-500/40 border-purple-400 text-white shadow-[0_0_20px_rgba(168,85,247,0.3)]'
-      : 'bg-black/70 border-white/20 text-gray-200 hover:bg-black/80 hover:border-white/40'}"
-    onclick={() => switchScene("nebula")}
-  >
-    {$_("nav.nebula")}
-  </button>
+    <button
+      class="px-3 py-1.5 md:px-5 md:py-2 rounded-full backdrop-blur-md border transition-all duration-300 cursor-pointer text-[9px] md:text-[10px] whitespace-nowrap font-mono uppercase tracking-[0.2em] shrink-0
+          {currentScene === 'blackhole'
+        ? 'bg-indigo-500/40 border-indigo-400 text-white shadow-[0_0_20px_rgba(99,102,241,0.3)]'
+        : 'bg-black/70 border-white/20 text-gray-200 hover:bg-black/80 hover:border-white/40'}"
+      onclick={() => switchScene("blackhole")}
+    >
+      {$_("nav.blackhole")}
+    </button>
+    <button
+      class="px-3 py-1.5 md:px-5 md:py-2 rounded-full backdrop-blur-md border transition-all duration-300 cursor-pointer text-[9px] md:text-[10px] whitespace-nowrap font-mono uppercase tracking-[0.2em] shrink-0
+          {currentScene === 'neutronstar'
+        ? 'bg-cyan-500/40 border-cyan-400 text-white shadow-[0_0_20px_rgba(34,211,238,0.3)]'
+        : 'bg-black/70 border-white/20 text-gray-200 hover:bg-black/80 hover:border-white/40'}"
+      onclick={() => switchScene("neutronstar")}
+    >
+      {$_("nav.neutronstar")}
+    </button>
+    <button
+      class="px-3 py-1.5 md:px-5 md:py-2 rounded-full backdrop-blur-md border transition-all duration-300 cursor-pointer text-[9px] md:text-[10px] whitespace-nowrap font-mono uppercase tracking-[0.2em] shrink-0
+          {currentScene === 'saturn'
+        ? 'bg-amber-500/40 border-amber-400 text-white shadow-[0_0_20px_rgba(251,191,36,0.3)]'
+        : 'bg-black/70 border-white/20 text-gray-200 hover:bg-black/80 hover:border-white/40'}"
+      onclick={() => switchScene("saturn")}
+    >
+      {$_("nav.saturn")}
+    </button>
+    <button
+      class="px-3 py-1.5 md:px-5 md:py-2 rounded-full backdrop-blur-md border transition-all duration-300 cursor-pointer text-[9px] md:text-[10px] whitespace-nowrap font-mono uppercase tracking-[0.2em] shrink-0
+          {currentScene === 'nebula'
+        ? 'bg-purple-500/40 border-purple-400 text-white shadow-[0_0_20px_rgba(168,85,247,0.3)]'
+        : 'bg-black/70 border-white/20 text-gray-200 hover:bg-black/80 hover:border-white/40'}"
+      onclick={() => switchScene("nebula")}
+    >
+      {$_("nav.nebula")}
+    </button>
+  </div>
 </div>
 
-<div class="fixed top-4 right-4 z-10 flex gap-4">
+<div
+  class="fixed top-4 right-4 z-50 flex gap-4 bg-black/30 backdrop-blur-sm p-2 rounded-full border border-white/10"
+>
   <LanguageSelector />
   <ThemeToggle />
 </div>

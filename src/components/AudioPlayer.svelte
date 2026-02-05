@@ -113,10 +113,10 @@
     }
 </script>
 
-<div class="fixed top-6 left-6 z-[100]">
+<div class="fixed top-4 md:top-6 left-4 md:left-6 z-[100]">
     <button
         onclick={toggleAudio}
-        class="group flex items-center gap-3 bg-accent/10 hover:bg-accent/20 border border-accent/50 hover:border-accent text-accent px-4 py-2 rounded-full transition-all duration-300 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
+        class="group flex items-center gap-2 md:gap-3 bg-accent/10 hover:bg-accent/20 border border-accent/50 hover:border-accent text-accent px-3 py-1.5 md:px-4 md:py-2 rounded-full transition-all duration-300 backdrop-blur-sm disabled:opacity-50 disabled:cursor-not-allowed"
         aria-label={playbackError
             ? $_("common.audio_unavailable")
             : isMuted
