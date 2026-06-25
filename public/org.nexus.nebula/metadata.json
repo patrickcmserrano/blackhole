@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            { "Name": "Patrick Serrano", "Email": "patrick@example.com" }
+        ],
+        "Category": "Plasma Look And Feel",
+        "Description": "Animated cosmic dust, pillars of creation, and star formation gas clouds matching the Interactive Universe visualization",
+        "Id": "org.nexus.nebula",
+        "License": "MIT",
+        "Name": "Quantum Universe: Nebula",
+        "Version": "1.0"
+    }
+}

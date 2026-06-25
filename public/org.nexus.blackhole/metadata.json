@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            { "Name": "Patrick Serrano", "Email": "patrick@example.com" }
+        ],
+        "Category": "Plasma Look And Feel",
+        "Description": "Animated event horizon spacetime curvature splash screen matching the Interactive Universe visualization",
+        "Id": "org.nexus.blackhole",
+        "License": "MIT",
+        "Name": "Quantum Universe: Black Hole",
+        "Version": "1.0"
+    }
+}

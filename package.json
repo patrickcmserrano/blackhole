@@ -13,7 +13,9 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "release:themes": "cd public && zip -r org.nexus.blackhole.zip org.nexus.blackhole && zip -r org.nexus.neutronstar.zip org.nexus.neutronstar && zip -r org.nexus.saturn.zip org.nexus.saturn && zip -r org.nexus.nebula.zip org.nexus.nebula",
+    "build:all": "npm run check && npm run build && npm run release:themes"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
