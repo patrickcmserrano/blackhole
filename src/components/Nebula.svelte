@@ -201,15 +201,7 @@
 
         // Custom Shader for Soft Particles
         const material = new THREE.ShaderMaterial({
-            uniforms: {
-                pointTexture: {
-                    value: new THREE.TextureLoader().load(
-                        "https://threejs.org/examples/textures/sprites/spark1.png",
-                    ),
-                }, // Fallback/Procedural?
-                // Let's generate a soft particle procedural texture in fragment shader to avoid external deps if possible,
-                // OR use a simple distance fade.
-            },
+            uniforms: {},
             vertexShader: `
                 attribute float size;
                 varying vec3 vColor;

@@ -14,7 +14,7 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "coverage": "vitest run --coverage",
-    "release:themes": "cd public && zip -r org.nexus.blackhole.zip org.nexus.blackhole && zip -r org.nexus.neutronstar.zip org.nexus.neutronstar && zip -r org.nexus.saturn.zip org.nexus.saturn && zip -r org.nexus.nebula.zip org.nexus.nebula",
+    "release:themes": "cp dist/index.html public/org.nexus.blackhole/contents/splash/index.html && cp dist/index.html public/org.nexus.neutronstar/contents/splash/index.html && cp dist/index.html public/org.nexus.saturn/contents/splash/index.html && cp dist/index.html public/org.nexus.nebula/contents/splash/index.html && cd public && zip -r org.nexus.blackhole.zip org.nexus.blackhole && zip -r org.nexus.neutronstar.zip org.nexus.neutronstar && zip -r org.nexus.saturn.zip org.nexus.saturn && zip -r org.nexus.nebula.zip org.nexus.nebula",
     "build:all": "npm run check && npm run build && npm run release:themes"
   },
   "devDependencies": {
@@ -30,6 +30,7 @@
     "svelte-check": "^4.1.5",
     "typescript": "~5.7.2",
     "vite": "^6.3.1",
+    "vite-plugin-singlefile": "^2.3.3",
     "vitest": "^3.1.2"
   },
   "dependencies": {
