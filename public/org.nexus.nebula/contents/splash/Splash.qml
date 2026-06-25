@@ -8,6 +8,7 @@ Rectangle {
     // KDE Plasma sets this property from 1 to 6 during desktop load.
     property int stage: 0
     onStageChanged: {
+        webglWebEngine.runJavaScript("if (window.setSplashStage) window.setSplashStage(" + stage + ");");
         if (stage === 6) {
             root.opacity = 0.0; // Fade-out look-and-feel window on completion
         }
@@ -21,6 +22,12 @@ Rectangle {
         id: webglWebEngine
         anchors.fill: parent
         url: Qt.resolvedUrl("index.html?scene=nebula&splash=true")
+
+        onLoadingChanged: {
+            if (loading === WebEngineView.LoadSucceededStatus) {
+                runJavaScript("if (window.setSplashStage) window.setSplashStage(" + root.stage + ");");
+            }
+        }
     }
 
     // Progress Dots (Corresponds to Boot Stages 1 to 5)

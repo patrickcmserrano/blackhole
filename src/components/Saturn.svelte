@@ -6,6 +6,7 @@
     import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
     import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 
+    let { stage = 0 } = $props<{ stage?: number }>();
     let canvas: HTMLCanvasElement;
 
     onMount(() => {
@@ -401,9 +402,10 @@
             createMoon(0.1, 11.5, 0x888888, 0.7), // Mimas
         ];
 
-        // --- Animation Loop ---
+        // --- Animation ---
         const clock = new THREE.Clock();
         let animationId: number;
+        let currentDistance = 45;
 
         const animate = () => {
             animationId = requestAnimationFrame(animate);
@@ -422,6 +424,12 @@
                 moon.mesh.position.z = Math.sin(moon.angle) * moon.distance;
                 moon.mesh.rotation.y += delta;
             });
+
+            // Camera glide animation based on loading stage
+            const targetDistance = 45 - (stage * 4.6); // 45 down to 22
+            currentDistance += (targetDistance - currentDistance) * 0.03;
+            controls.minDistance = currentDistance;
+            controls.maxDistance = currentDistance;
 
             controls.update();
             composer.render();

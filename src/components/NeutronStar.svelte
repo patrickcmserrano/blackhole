@@ -6,6 +6,7 @@
     import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
     import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 
+    let { stage = 0 } = $props<{ stage?: number }>();
     let canvas: HTMLCanvasElement;
 
     // --- Shaders ---
@@ -419,6 +420,7 @@
         // Camera Shake State
         const originalCamPos = camera.position.clone();
         const noiseGen = new THREE.Vector3(); // Placeholder for shake noise
+        let currentDistance = 18;
 
         const animate = () => {
             animationId = requestAnimationFrame(animate);
@@ -458,6 +460,15 @@
                 shake = (alignment - 0.95) * 5.0; // 0 to 0.25 intensity
             }
 
+            // Camera glide animation based on loading stage
+            const targetDistance = 18 - (stage * 2.0); // 18 down to 8
+            currentDistance += (targetDistance - currentDistance) * 0.03;
+            controls.minDistance = currentDistance;
+            controls.maxDistance = currentDistance;
+
+            controls.update();
+            originalCamPos.copy(camera.position);
+
             if (shake > 0) {
                 camera.position.x =
                     originalCamPos.x + (Math.random() - 0.5) * shake * 0.5;
@@ -465,20 +476,8 @@
                     originalCamPos.y + (Math.random() - 0.5) * shake * 0.5;
                 camera.position.z =
                     originalCamPos.z + (Math.random() - 0.5) * shake * 0.5;
-            } else {
-                // Smooth return? Or just snap if delta is small enough.
-                // Lerp back to avoid snapping
-                camera.position.lerp(originalCamPos, 0.1);
             }
 
-            controls.update(); // This might fight with camera shake if not careful.
-            // Since controls updates camera position based on target and radius.
-            // The shake applied above is overridden by controls.update() typically if controls.enableDamping is true.
-            // Hack: apply shake to the LOOK AT target or after controls update?
-            // Actually OrbitControls modifies position. If we modify position AFTER controls.update(), it works for that frame, but next frame controls resets it.
-            // To do it properly with OrbitControls, we should shake center or just accept subtle fight.
-            // Let's modify the controls target slightly instead?
-            // Or just apply shake to scene.position! (Shake the world)
             if (shake > 0) {
                 scene.position.x = (Math.random() - 0.5) * shake * 0.2;
                 scene.position.y = (Math.random() - 0.5) * shake * 0.2;

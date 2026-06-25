@@ -6,6 +6,7 @@
     import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
     import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 
+    let { stage = 0 } = $props<{ stage?: number }>();
     let canvas: HTMLCanvasElement;
 
     onMount(() => {
@@ -333,6 +334,7 @@
         // --- Animation ---
         const clock = new THREE.Clock();
         let animationId: number;
+        let currentDistance = 25;
 
         const animate = () => {
             animationId = requestAnimationFrame(animate);
@@ -341,6 +343,12 @@
             // Update uniforms
             diskMaterial.uniforms.uTime.value = elapsedTime;
             photonMat.uniforms.uTime.value = elapsedTime;
+
+            // Camera glide animation based on loading stage
+            const targetDistance = 25 - (stage * 3.0); // 25 down to 10
+            currentDistance += (targetDistance - currentDistance) * 0.03;
+            controls.minDistance = currentDistance;
+            controls.maxDistance = currentDistance;
 
             controls.update();
 

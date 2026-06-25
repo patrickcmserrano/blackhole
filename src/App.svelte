@@ -29,6 +29,14 @@
       : "blackhole"
   );
 
+  let currentStage = $state(0);
+
+  if (typeof window !== "undefined") {
+    (window as any).setSplashStage = (stage: number) => {
+      currentStage = stage;
+    };
+  }
+
   function switchScene(scene: SceneType) {
     currentScene = scene;
   }
@@ -36,13 +44,13 @@
 
 <div class="fixed inset-0 z-0">
   {#if currentScene === "blackhole"}
-    <BlackHole />
+    <BlackHole stage={currentStage} />
   {:else if currentScene === "neutronstar"}
-    <NeutronStar />
+    <NeutronStar stage={currentStage} />
   {:else if currentScene === "saturn"}
-    <Saturn />
+    <Saturn stage={currentStage} />
   {:else if currentScene === "nebula"}
-    <Nebula />
+    <Nebula stage={currentStage} />
   {/if}
 </div>
 

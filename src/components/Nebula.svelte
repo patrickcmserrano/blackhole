@@ -6,6 +6,7 @@
     import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
     import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 
+    let { stage = 0 } = $props<{ stage?: number }>();
     let canvas: HTMLCanvasElement;
 
     onMount(() => {
@@ -266,6 +267,7 @@
         // --- Animation ---
         const clock = new THREE.Clock();
         let animationId: number;
+        let currentDistance = 120;
 
         const animate = () => {
             animationId = requestAnimationFrame(animate);
@@ -273,6 +275,12 @@
 
             // Slowly rotate the entire nebula
             nebula.rotation.y += 0.05 * delta;
+
+            // Camera glide animation based on loading stage
+            const targetDistance = 120 - (stage * 11.0); // 120 down to 65
+            currentDistance += (targetDistance - currentDistance) * 0.03;
+            controls.minDistance = currentDistance;
+            controls.maxDistance = currentDistance;
 
             controls.update();
             composer.render();
